@@ -7,7 +7,7 @@
       sm:py-6
       bg-white
       shadow
-      sm:bg-gray-900 sm:shadow-none sm:fixed
+      sm:bg-transparent sm:shadow-none sm:fixed
       w-full
       z-10
     "
@@ -69,7 +69,7 @@
           w-full
           sm:space-x-4 sm:text-right sm:block sm:text-white
         "
-        :class="{ 'hidden': !isVisible }"
+        :class="{ hidden: !isVisible }"
       >
         <NavbarLink to="/articles" label="Articles" />
         <NavbarLink to="/about" label="About" />
@@ -92,7 +92,7 @@ export default {
     return {
       isVisible,
       toggle,
-    }
-  }
+    };
+  },
 };
 </script>
