@@ -7,10 +7,13 @@
       sm:py-6
       bg-white
       shadow
-      sm:bg-transparent sm:shadow-none sm:fixed
+      sm:fixed
       w-full
       z-10
+      transitions-colors
+      duration-500
     "
+    :class="{ 'sm:bg-transparent sm:shadow-none': !showWhiteBackground }"
   >
     <div
       class="
@@ -24,7 +27,7 @@
     >
       <div class="w-full flex flex-row items-center justify-between">
         <div class="text-3xl font-bold">
-          <span class="sm:text-white">Lara</span>
+          <span :class="{'sm:text-white': !showWhiteBackground}">Lara</span>
           <span class="text-primary">Tips</span>
         </div>
         <div>
@@ -67,9 +70,9 @@
           mt-4
           sm:mt-0
           w-full
-          sm:space-x-4 sm:text-right sm:block sm:text-white
+          sm:space-x-4 sm:text-right sm:block
         "
-        :class="{ hidden: !isVisible }"
+        :class="{ hidden: !isVisible, 'sm:text-white': !showWhiteBackground }"
       >
         <NavbarLink to="/articles" label="Articles" />
         <NavbarLink to="/about" label="About" />
@@ -81,6 +84,7 @@
 <script>
 import NavbarLink from "./NavbarLink.vue";
 import { useToggle } from "../../composables/useToggle";
+import { ref } from "@vue/reactivity";
 export default {
   name: "Navbar",
   components: {
@@ -89,9 +93,22 @@ export default {
 
   setup() {
     let { isVisible, toggle } = useToggle();
+    let showWhiteBackground = ref(false);
+
+    document.addEventListener("scroll", function () {
+      let bodyTopPosition = document.body.getBoundingClientRect().top;
+
+      if (bodyTopPosition < -150) {
+        showWhiteBackground.value = true;
+      } else {
+        showWhiteBackground.value = false;
+      }
+    });
+
     return {
       isVisible,
       toggle,
+      showWhiteBackground,
     };
   },
 };
