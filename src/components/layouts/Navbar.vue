@@ -27,7 +27,7 @@
     >
       <div class="w-full flex flex-row items-center justify-between">
         <div class="text-3xl font-bold">
-          <span :class="{'sm:text-white': !showWhiteBackground}">Lara</span>
+          <span :class="{ 'sm:text-white': !showWhiteBackground }">Lara</span>
           <span class="text-primary">Tips</span>
         </div>
         <div>
@@ -66,14 +66,10 @@
         </div>
       </div>
       <div
-        class="
-          mt-4
-          sm:mt-0
-          w-full
-          sm:space-x-4 sm:text-right sm:block
-        "
+        class="mt-4 sm:mt-0 w-full sm:space-x-4 sm:text-right sm:block"
         :class="{ hidden: !isVisible, 'sm:text-white': !showWhiteBackground }"
       >
+        <NavbarLink to="/" label="Home" />
         <NavbarLink to="/articles" label="Articles" />
         <NavbarLink to="/about" label="About" />
         <NavbarLink to="/contact" label="Contact" />
