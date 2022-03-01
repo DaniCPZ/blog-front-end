@@ -9,7 +9,19 @@
     </div>
 
     <div class="mt-8 sm:mt-12">
-      <router-link to="/articles" class="px-4 py-2 sm:px-6 bg-primary text-white rounded focus:outline-none">View All</router-link>
+      <router-link
+        to="/articles"
+        class="
+          px-4
+          py-2
+          sm:px-6
+          bg-primary
+          text-white
+          rounded
+          focus:outline-none
+        "
+        >View All</router-link
+      >
     </div>
   </div>
 </template>
