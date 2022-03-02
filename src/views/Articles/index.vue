@@ -15,6 +15,8 @@
           rounded
           focus:outline-none
         "
+        @click="showMoreArticles"
+        v-if="articles.links.next !== null"
       >
         <span v-if="loading">Loading...</span>
         <span v-else>View More</span>
@@ -38,10 +40,17 @@ export default {
   setup() {
     let { fetchArticles, loading, articles } = useArticle();
     fetchArticles();
+    function showMoreArticles() {
+      fetchArticles({
+        showMore: true,
+        page: articles.value.meta.current_page + 1,
+      });
+    }
 
     return {
       articles,
       loading,
+      showMoreArticles,
     };
   },
 };

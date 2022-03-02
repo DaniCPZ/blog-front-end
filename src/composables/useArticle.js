@@ -4,15 +4,26 @@ import api from "../apis/api";
 export function useArticle() {
   let articles = ref({
     data: [],
+    links: {},
+    meta: {},
   })
 
   let loading = ref(false);
 
-  function fetchArticles() {
+  function fetchArticles(params = {}) {
+    let { page = 1, showMore = false } = params;
+
     loading.value = true;
-    api.get('/articles')
+    api.get('/articles', { params: { page } })
       .then(res => {
-        articles.value = res.data
+        if (showMore) {
+          articles.value = {
+            ...res.data,
+            data: [...articles.value.data, ...res.data.data],
+          }
+        } else {
+          articles.value = res.data
+        }
       })
       .finally(() => loading.value = false);
   }
