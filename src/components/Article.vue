@@ -8,8 +8,8 @@
       }"
     >
       <img
-        src="/images/image-1.jpg"
-        alt="article"
+        :src="article.image_url"
+        :alt="article.title"
         class="w-full h-full object-cover"
       />
     </div>
@@ -19,20 +19,16 @@
           'sm:py-2 sm:mt-0': isGrid,
         }"
       >
-        <div class="text-base text-gray-500">Category name</div>
+        <div class="text-base text-gray-500">{{ article.category.name }}</div>
         <h3 class="mt-1 leading-tight text-2xl">
           <router-link
-            to="/articles/article-slug"
+            :to="`/articles/${article.slug}`"
             class="hover:text-primary font-bold transition-colors duration-300"
           >
-            Lorem, ipsum dolor sit amet consectetur adipisicing.
+            {{ article.title }}
           </router-link>
         </h3>
-        <div class="mt-2 text-gray-700">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla quidem
-          maiores quaerat totam libero, et architecto minima magni. Quasi,
-          veritatis...
-        </div>
+        <div class="mt-2 text-gray-700">{{ article.small_description }}</div>
       </div>
       <div class="mt-1 text-base text-gray-500 flex items-center">
         <svg
@@ -49,7 +45,7 @@
             d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
           ></path>
         </svg>
-        <div class="ml-2">5 mins ago</div>
+        <div class="ml-2">{{ article.created_at_for_human }}</div>
       </div>
     </div>
   </div>
@@ -63,6 +59,7 @@ export default {
       type: String,
       default: "list",
     },
+    article: Object,
   },
 
   setup(props) {
