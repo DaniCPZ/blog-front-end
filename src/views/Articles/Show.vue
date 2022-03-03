@@ -1,5 +1,8 @@
 <template>
-  <InnerPageHero image-url="/images/image-5.jpg" title="Article Title" />
+  <InnerPageHero
+    :image-url="article?.image_url ?? '/images/loading.gif'"
+    :title="article.title"
+  />
 
   <div class="container mx-auto px-4 sm:px-0 py-8 sm:py-20">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between">
@@ -20,7 +23,7 @@
             ></path>
           </svg>
         </div>
-        <div class="ml-1">Category Name</div>
+        <div class="ml-1">{{ article.category.name }}</div>
       </div>
 
       <div class="mt-2 sm:mt-0 text-sm flex items-center text-gray-700">
@@ -40,57 +43,39 @@
             ></path>
           </svg>
         </div>
-        <div class="ml-1">September 18th, 2020</div>
+        <div class="ml-1">{{ article.created_date }}</div>
       </div>
     </div>
 
-    <div class="mt-4 sm:mt-16">
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia
-        necessitatibus, id laboriosam soluta magnam vitae esse cum consequuntur,
-        quos est impedit voluptatem non laborum blanditiis in quibusdam sequi
-        dicta rerum enim odit sapiente, doloremque pariatur? Earum totam aperiam
-        possimus aspernatur fugiat adipisci quia ducimus, molestiae itaque
-        dignissimos? Molestiae, doloremque odio?
-      </p>
-      <p class="mt-4">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia
-        necessitatibus, id laboriosam soluta magnam vitae esse cum consequuntur,
-        quos est impedit voluptatem non laborum blanditiis in quibusdam sequi
-        dicta rerum enim odit sapiente, doloremque pariatur? Earum totam aperiam
-        possimus aspernatur fugiat adipisci quia ducimus, molestiae itaque
-        dignissimos? Molestiae, doloremque odio?
-      </p>
-      <p class="mt-4">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia
-        necessitatibus, id laboriosam soluta magnam vitae esse cum consequuntur,
-        quos est impedit voluptatem non laborum blanditiis in quibusdam sequi
-        dicta rerum enim odit sapiente, doloremque pariatur? Earum totam aperiam
-        possimus aspernatur fugiat adipisci quia ducimus, molestiae itaque
-        dignissimos? Molestiae, doloremque odio?
-      </p>
-      <p class="mt-4">
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia
-        necessitatibus, id laboriosam soluta magnam vitae esse cum consequuntur,
-        quos est impedit voluptatem non laborum blanditiis in quibusdam sequi
-        dicta rerum enim odit sapiente, doloremque pariatur? Earum totam aperiam
-        possimus aspernatur fugiat adipisci quia ducimus, molestiae itaque
-        dignissimos? Molestiae, doloremque odio?
-      </p>
-    </div>
+    <div class="mt-4 sm:mt-16" v-html="article.description"></div>
   </div>
 </template>
 
 <script>
 import InnerPageHero from "../../components/InnerPageHero.vue";
-
+import { useArticle } from "../../composables/useArticle";
 export default {
   components: {
     InnerPageHero,
   },
 
-  props: {},
+  props: {
+    slug: {
+      type: String,
+      required: true,
+    },
+  },
 
-  setup() {},
+  setup(props) {
+    let { articleDetail, articleDetailLoading, fetchArticleDetail } =
+      useArticle();
+
+    fetchArticleDetail(props.slug);
+
+    return {
+      article: articleDetail,
+      loading: articleDetailLoading,
+    };
+  },
 };
 </script>

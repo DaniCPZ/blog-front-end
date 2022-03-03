@@ -28,9 +28,24 @@ export function useArticle() {
       .finally(() => loading.value = false);
   }
 
+  let articleDetail = ref({ category: {} });
+  let articleDetailLoading = ref(true);
+
+  function fetchArticleDetail(slug) {
+    articleDetailLoading.value = false;
+    api.get(`articles/${slug}`)
+      .then(res => {
+        articleDetail.value = res.data.data;
+      })
+      .finally(() => articleDetailLoading.value = true)
+  }
+
   return {
     articles,
     fetchArticles,
     loading,
+    articleDetail,
+    articleDetailLoading,
+    fetchArticleDetail,
   }
 }

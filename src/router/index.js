@@ -25,7 +25,8 @@ const routes = [
   {
     path: '/articles/:slug',
     name: 'articles.show',
-    component: () => import(/* webpackChunkName: "articles-detail" */ '../views/Articles/Show.vue')
+    component: () => import(/* webpackChunkName: "articles-detail" */ '../views/Articles/Show.vue'),
+    props: true,
   },
 ]
 
