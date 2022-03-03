@@ -1,5 +1,5 @@
 <template>
-  <div class="relative z-0 h-40 sm:h-64">
+  <div :class="`relative z-0 ${heightClass}`">
     <img :src="imageUrl" alt="about" class="h-full w-full object-cover" />
 
     <div class="absolute inset-0 bg-black opacity-50"></div>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { computed } from "@vue/runtime-core";
 export default {
   props: {
     imageUrl: {
@@ -42,10 +43,21 @@ export default {
     },
     title: {
       type: String,
-      default: '',
+      default: "",
     },
+    height: String,
   },
 
-  setup() {},
+  setup(props) {
+    let heightClass = computed(() => {
+      if (props.height === "articleDetail") {
+        return "h-auto sm:h-600px";
+      }
+      return "h-40 sm:h-64";
+    });
+    return {
+      heightClass,
+    };
+  },
 };
 </script>

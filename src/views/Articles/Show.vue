@@ -2,6 +2,7 @@
   <InnerPageHero
     :image-url="article?.image_url ?? '/images/loading.gif'"
     :title="article.title"
+    height="articleDetail"
   />
 
   <div class="container mx-auto px-4 sm:px-0 py-8 sm:py-20">
