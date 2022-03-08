@@ -1,7 +1,7 @@
 <template>
   <div class="relative z-0 hero-height">
     <img
-      src="/images/hero.jpg"
+      :src="settings.hero_image_url"
       alt="hero"
       class="block w-full h-full object-cover"
     />
@@ -12,12 +12,7 @@
       <div class="container mx-auto h-full flex flex-col justify-center">
         <div>Welcome to</div>
         <div class="mt-1 text-6xl font-bold">LaraTips</div>
-        <div class="mt-2 sm:w-1/2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-          cumque eius soluta nemo inventore! Magni quibusdam repudiandae
-          distinctio tenetur nihil delectus eos autem accusantium animi quaerat
-          reiciendis, numquam voluptatem laudantium.
-        </div>
+        <div class="mt-2 sm:w-1/2">{{ settings.hero_description }}</div>
 
         <div class="mt-8 text-primary">
           <svg
@@ -40,5 +35,14 @@
   </div>
 </template>
 <script>
-export default {};
+import { useSettings } from "../../composables/useSettings.js";
+
+export default {
+  setup() {
+    let { settings } = useSettings();
+    return {
+      settings,
+    };
+  },
+};
 </script>

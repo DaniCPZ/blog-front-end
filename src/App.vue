@@ -13,10 +13,16 @@
 <script>
 import Footer from "./components/layouts/Footer.vue";
 import Navbar from "./components/layouts/Navbar.vue";
+import { useSettings } from "./composables/useSettings.js";
+
 export default {
   components: {
     Navbar,
     Footer,
+  },
+  setup() {
+    let { fetchSettings } = useSettings();
+    fetchSettings();
   },
 };
 </script>
