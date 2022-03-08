@@ -1,24 +1,5 @@
-# blog-front-end
+Project carried out following the "[Building Blog With Laravel/Jetstream/InertiaJs on Backend and Vue/Tailwind on Frontend](https://www.youtube.com/watch?v=6IaHW7NDJL8&list=PL2DahmvUpeuuCgEC4fpp7GhmEZJqGJD7v)" series of the [Laraveltips](https://www.youtube.com/c/Laratips/videos) channel.
 
-## Project setup
-```
-yarn install
-```
+My thanks to all the free content creators in the Laravel community.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[Backend](https://github.com/DaniCPZ/blog-backend)
